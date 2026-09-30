@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🍱 2026 東京＆日光 5天4夜隨身行程</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #2563eb;
+            --accent: #d97706;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #15803d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans TC', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        /* 頂部 Header */
+        .app-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: white;
+            padding: 30px 20px 24px;
+            text-align: center;
+            border-bottom-left-radius: 24px;
+            border-bottom-right-radius: 24px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .app-header h1 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .app-header p {
+            font-size: 0.88rem;
+            opacity: 0.85;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* 重點總覽卡片 */
+        .summary-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin-top: -15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            border: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .summary-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .summary-item span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .summary-item b {
+            font-size: 0.95rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .summary-actions {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .btn-quick {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 11px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-quick-hotel {
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
+        }
+
+        .btn-quick-call {
+            background: #f8fafc;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+        }
+
+        /* 標籤頁切換 Tab */
+        .tabs {
+            display: flex;
+            overflow-x: auto;
+            gap: 8px;
+            padding: 4px 2px 14px;
+            scrollbar-width: none;
+        }
+        .tabs::-webkit-scrollbar { display: none; }
+
+        .tab-btn {
+            flex: 0 0 auto;
+            background: #e2e8f0;
+            color: #475569;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 3px 8px rgba(30, 58, 138, 0.35);
+        }
+
+        /* 行程天數內容 */
+        .day-panel {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .day-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            border: 1px solid var(--border);
+            margin-bottom: 16px;
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+
+        .day-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .day-date {
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: #f1f5f9;
+            padding: 4px 10px;
+            border-radius: 12px;
+            color: #475569;
+        }
+
+        /* 時間軸行程節點 */
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 18px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 6px;
+            bottom: 6px;
+            width: 2px;
+            background: #cbd5e1;
+        }
+
+        .node {
+            position: relative;
+            margin-bottom: 18px;
+        }
+        .node:last-child { margin-bottom: 0; }
+
+        .node::before {
+            content: '';
+            position: absolute;
+            left: -19px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+
+        .node-time {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            margin-bottom: 2px;
+        }
+
+        .node-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 3px;
+        }
+
+        .node-desc {
+            font-size: 0.83rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .badge-reservation {
+            display: inline-block;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 4px;
+            margin-left: 6px;
+        }
+
+        .badge-business {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 4px;
+            margin-left: 6px;
+        }
+
+        /* 導航按鈕 */
+        .btn-map {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+            margin-top: 14px;
+        }
+
+        /* 餐食備註標籤 */
+        .meal-bar {
+            display: flex;
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 8px 12px;
+            gap: 12px;
+            margin-top: 15px;
+            font-size: 0.8rem;
+            border: 1px solid var(--border);
+        }
+
+        .meal-bar span b {
+            color: var(--primary);
+            margin-right: 2px;
+        }
+
+        /* 資訊卡片區 */
+        .info-card {
+            background: white;
+            border-radius: 16px;
+            padding: 18px 20px;
+            border: 1px solid var(--border);
+            margin-bottom: 16px;
+        }
+
+        .info-card h3 {
+            font-size: 0.95rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .table-info {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+        }
+
+        .table-info th, .table-info td {
+            padding: 8px 6px;
+            border-bottom: 1px solid #edf2f7;
+            text-align: left;
+        }
+
+        .table-info th {
+            width: 32%;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .table-info td {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .tips-list {
+            list-style: none;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .tips-list li {
+            position: relative;
+            padding-left: 16px;
+            margin-bottom: 8px;
+        }
+
+        .tips-list li::before {
+            content: '•';
+            position: absolute;
+            left: 4px;
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 25px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 頂部標題 Header -->
+    <header class="app-header">
+        <h1>🍱 東京＆日光 5天4夜美饌行</h1>
+        <p>日比谷下榻・商務會面・日光世界遺產隨身 App</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- 重點卡片總覽 -->
+        <div class="summary-card">
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <span>出發日期</span>
+                    <b><i class="fa-regular fa-calendar"></i> 10/14 (三)</b>
+                </div>
+                <div class="summary-item">
+                    <span>下榻飯店</span>
+                    <b><i class="fa-solid fa-hotel"></i> THE BLOSSOM HIBIYA</b>
+                </div>
+                <div class="summary-item">
+                    <span>去程航班</span>
+                    <b><i class="fa-solid fa-plane-departure"></i> BR198 (09:00)</b>
+                </div>
+                <div class="summary-item">
+                    <span>回程航班</span>
+                    <b><i class="fa-solid fa-plane-arrival"></i> BR197 (14:25)</b>
+                </div>
+            </div>
+
+            <div class="summary-actions">
+                <a href="https://www.google.com/maps/search/?api=1&query=THE+BLOSSOM+HIBIYA" target="_blank" class="btn-quick btn-quick-hotel">
+                    <i class="fa-solid fa-location-dot"></i> 查看飯店位置（新橋站 / 日比谷）
+                </a>
+                <a href="tel:+81335918702" class="btn-quick btn-quick-call">
+                    <i class="fa-solid fa-phone"></i> 一鍵撥打飯店電話 (03-3591-8702)
+                </a>
+            </div>
+        </div>
+
+        <!-- 天數切換 Tab 標籤 -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchDay(1)">D1 抵達與人形町</button>
+            <button class="tab-btn" onclick="switchDay(2)">D2 日本橋與山崎</button>
+            <button class="tab-btn" onclick="switchDay(3)">D3 會長餐敘與天婦羅</button>
+            <button class="tab-btn" onclick="switchDay(4)">D4 日光頂級一日遊</button>
+            <button class="tab-btn" onclick="switchDay(5)">D5 啟程返台</button>
+        </div>
+
+        <!-- 每日內容面板 -->
+        <main>
+            <!-- Day 1 -->
+            <div id="day-1" class="day-panel active">
+                <div class="card">
+                    <div class="day-header">
+                        <span class="day-title">抵達東京・日比谷入住・人形町晚餐</span>
+                        <span class="day-date">10/14 (三)</span>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="node">
+                            <div class="node-time">09:00 - 13:25</div>
+                            <div class="node-title">長榮航空 BR198 (TPE T2 ➔ NRT T1)</div>
+                            <div class="node-desc">搭乘商務艙抵達成田機場第一航廈，辦理入境與行李提領。</div>
+                        </div>
+
+                        <div class="node">
+                            <div class="node-time">14:15 - 15:30</div>
+                            <div class="node-title">成田機場 ➔ THE BLOSSOM HIBIYA Check-in</div>
+                            <div class="node-desc">搭乘成田特快 N'EX / Skyliner 或專車直達飯店辦理入住放行李。</div>
+                        </div>
+
+                        <div class="node">
+                            <div class="node-time">17:30 - 19:00</div>
+                            <div class="node-title">
+                                人形町 やま田 <span class="badge-reservation">已預約 4 位</span>
+                            </div>
+                            <div class="node-desc">
+                                <b>預約確認代碼：</b>Z6ST6VUEKS<br>
+                                <b>地址：</b>東京都中央区日本橋人形町1-9-2 富士ビル B1<br>
+                                <b>電話：</b>03-6661-9677
+                            </div>
+                        </div>
+
+                        <div class="node">
+                            <div class="node-time">19:30~</div>
+                            <div class="node-title">甘酒橫丁散策 ➔ 返回日比谷飯店</div>
+                            <div class="node-desc">漫步於江戶氛圍的人形町老街，享受悠閒夜色。</div>
+                        </div>
+                    </div>
+
+                    <a href="https://www.google.com/maps/dir/?api=1&origin=Narita+Airport+Terminal+1&destination=THE+BLOSSOM+HIBIYA" target="_blank" class="btn-map">
+                        <i class="fa-solid fa-map-location-dot"></i> 開啟 D1【成田機場 ➔ 日比谷飯店】導航
+                    </a>
+
+                    <div class="meal-bar">
+                        <span><b>早</b> 機上/自理</span>
+                        <span><b>午</b> 機上精選套餐</span>
+                        <span><b>晚</b> 人形町 やま田 (預約)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 2 -->
+            <div id="day-2" class="day-panel">
+                <div class="card">
+                    <div class="day-header">
+                        <span class="day-title">日本橋漫遊・京橋割烹名宴</span>
+                        <span class="day-date">10/15 (四)</span>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="node">
+                            <div class="node-time">10:00 - 14:00</div>
+                            <div class="node-title">日本橋文化與商圈散策</div>
+                            <div class="node-desc">造訪日本橋三越、COREDO 室町職人選物與福德神社。</div>
+                        </div>
+
+                        <div class="node">
+                            <div class="node-time">14:30 - 17:30</div>
+                            <div class="node-title">銀座商圈漫步・咖啡時光</div>
+                            <div class="node-desc">由日本橋漫步至銀座大街，享受午後休閒氛圍。</div>
+                        </div>
+
+                        <div class="node">
+                            <div class="node-time">18:00 - 19:30</div>
+                            <div class="node-title">
+                                日本料理 山崎 <span class="badge-reservation">已預約 4 位</span>
+                            </div>
+                            <div class="node-desc">
+                                <b>預約確認代碼：</b>QYAZXQJPH4<br>
+                                <b>地址：</b>東京都中央区京橋2-6-7 京橋プレイス<br>
+                                <b>電話：</b>050-3138-2600
+                            </div>
+                        </div>
+
+                        <div class="node">
+                            <div class="node-time">20:00~</div>
+                            <div class="node-title">八重洲/丸之內散策 ➔ 返回日比谷</div>
+                            <div class="node-desc">欣賞東京車站夜景，返回 THE BLOSSOM HIBIYA 休息。</div>
+                        </div>
+                    </div>
+
+                    <a href="https://www.google.com/maps/dir/?api=1&origin=THE+BLOSSOM+HIBIYA&destination=2-6-7+Kyobashi+Chuo-ku+Tokyo" target="_blank" class="btn-map">
+                        <i class="fa-solid fa-map-location-dot"></i> 開啟 D2【飯店 ➔ 京橋 日本料理 山崎】導航
+                    </a>
+
+                    <div class="meal-bar">
+                        <span><b>早</b> 飯店和洋自助</span>
+                        <span><b>午</b> 日本橋精選輕食</span>
+                        <span><b>晚</b> 日本料理 山崎 (預約)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 3 -->
+            <div id="day-3" class="day-panel">
+                <div class="card">
+                    <div class="day-header">
+                        <span class="day-title">日本會長餐敘・OB交流・銀座天婦羅</span>
+                        <span class="day-date">10/16 (五)</span>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="node">
+                            <div class="node-time">11:30 - 14:00</div>
+                            <div class="node-title">
+                                與日本會長午餐會談 <span class="badge-business">重要商務</span>
+                            </div>
+                            <div class="node-desc">白天預留時段與日本會長共進午餐，交流情誼與商務展望。</div>
+                        </div>
+
+                        <div class="node">
+                            <div class="node-time">14:30 - 16:30</div>
+                            <div class="node-title">
+                                OB成員會面交流 <span class="badge-business">交流會</span>
+                            </div>
+                            <div class="node-desc">下午安排與 OB 成員碰面敘舊，洽談心得。</div>
+                        </div>
+
+                        <div class="node">
+                            <div class="node-time">17:30 - 19:00</div>
+                            <div class="node-title">
+                                てんぷら山の上 Ginza <span class="badge-reservation">已預約 4 位</span>
+                            </div>
+                            <div class="node-desc">
+                                <b>預約確認代碼：</b>7R23RA2P7P<br>
+                                <b>地址：</b>東京都中央区銀座6丁目10-1 (GINZA SIX 13F)<br>
+                                <b>電話：</b>03-6264-5516<br>
+                                <b>特色：</b>傳承御茶之水百年名門手藝的頂級天婦羅晚宴。
+                            </div>
+                        </div>
+
+                        <div class="node">
+                            <div class="node-time">19:30~</div>
+                            <div class="node-title">銀座夜景漫遊 ➔ 返回日比谷</div>
+                            <div class="node-desc">GINZA SIX 空中花園賞景，散步返回飯店。</div>
+                        </div>
+                    </div>
+
+                    <a href="https://www.google.com/maps/dir/?api=1&origin=THE+BLOSSOM+HIBIYA&destination=GINZA+SIX+13F+Tempura+Yamanoue" target="_blank" class="btn-map">
+                        <i class="fa-solid fa-map-location-dot"></i> 開啟 D3【飯店 ➔ GINZA SIX 山の上】導航
+                    </a>
+
+                    <div class="meal-bar">
+                        <span><b>早</b> 飯店和洋自助</span>
+                        <span><b>午</b> 日本會長午餐會談</span>
+                        <span><b>晚</b> てんぷら山の上 Ginza (預約)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 4 -->
+            <div id="day-4" class="day-panel">
+                <div class="card">
+                    <div class="day-header">
+                        <span class="day-title">日光世界遺產・名店午餐・湖瀑漫遊</span>
+                        <span class="day-date">10/17 (六)</span>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="node">
+                            <div class="node-time">07:30 - 10:00</div>
+                            <div class="node-title">專車出發 ➔ 前往日光世界遺產</div>
+                            <div class="node-desc">自日比谷飯店搭乘專車出發（車程約 2 小時），前往日光歷史名勝。</div>
+                        </div>
+
+                        <div class="node">
+                            <div class="node-time">10:00 - 12:00</div>
+                            <div class="node-title">日光東照宮 參拜與藝術巡禮</div>
+                            <div class="node-desc">參觀陽明門、眠貓、三猿等日本國寶級江戶木雕藝術殿堂。</div>
+                        </div>
+
+                        <div class="node">
+                            <div class="node-time">12:15 - 13:45</div>
+                            <div class="node-title">
+                                日光頂級午餐饗宴 <span class="badge-reservation">頂級推薦</span>
+                            </div>
+                            <div class="node-desc">
+                                <b>建議首選：</b><br>
+                                1. <b>The Ritz-Carlton, Nikko</b>（中禪寺湖畔頂級會席/西餐）<br>
+                                2. <b>西洋料理 明治之館</b>（東照宮旁明治百年有形文化財石造洋館）
+                            </div>
+                        </div>
+
+                        <div class="node">
+                            <div class="node-time">14:00 - 14:30</div>
+                            <div class="node-title">途經「第二伊呂波坂 (第二いろは坂)」</div>
+                            <div class="node-desc">驅車攀升 440 公尺高低差的著名曲道，沿途飽覽秋日壯闊山景。</div>
+                        </div>
+
+                        <div class="node">
+                            <div class="node-time">14:30 - 16:30</div>
+                            <div class="node-title">中禪寺湖畔＆華嚴瀑布自由活動</div>
+                            <div class="node-desc">搭乘觀瀑電梯近距離感受日本三大名瀑之一「華嚴瀑布」氣勢，隨後於中禪寺湖畔步道悠閒散策。</div>
+                        </div>
+
+                        <div class="node">
+                            <div class="node-time">16:30 - 19:00</div>
+                            <div class="node-title">專車返抵東京 ➔ 享受溫馨晚餐</div>
+                            <div class="node-desc">專車返回東京日比谷飯店，晚餐可依步調於市區享用老舖美食。</div>
+                        </div>
+                    </div>
+
+                    <a href="https://www.google.com/maps/dir/?api=1&origin=THE+BLOSSOM+HIBIYA&destination=Chuzenji+Lake" target="_blank" class="btn-map">
+                        <i class="fa-solid fa-map-location-dot"></i> 開啟 D4【東京 ➔ 日光東照宮 ➔ 中禪寺湖】一日遊導航
+                    </a>
+
+                    <div class="meal-bar">
+                        <span><b>早</b> 飯店和洋自助</span>
+                        <span><b>午</b> 日光麗思卡爾頓 / 明治之館</span>
+                        <span><b>晚</b> 市區經典美味</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 5 -->
+            <div id="day-5" class="day-panel">
+                <div class="card">
+                    <div class="day-header">
+                        <span class="day-title">悠閒退房・滿載回憶啟程返台</span>
+                        <span class="day-date">10/18 (日)</span>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="node">
+                            <div class="node-time">09:30 - 11:00</div>
+                            <div class="node-title">飯店享用早餐 ➔ 悠閒辦理退房</div>
+                            <div class="node-desc">於 THE BLOSSOM HIBIYA 享用精緻早餐，辦理 Check-out。</div>
+                        </div>
+
+                        <div class="node">
+                            <div class="node-time">11:15 - 12:20</div>
+                            <div class="node-title">日比谷 ➔ 成田機場第一航廈 (NRT T1)</div>
+                            <div class="node-desc">搭乘特急或接駁專車前往成田機場 T1。</div>
+                        </div>
+
+                        <div class="node">
+                            <div class="node-time">12:20 - 14:00</div>
+                            <div class="node-title">長榮商務艙報到・免稅採購・貴賓室</div>
+                            <div class="node-desc">託運行李、通關檢查，享受長榮專屬貴賓室候機服務。</div>
+                        </div>
+
+                        <div class="node">
+                            <div class="node-time">14:25 - 17:05</div>
+                            <div class="node-title">長榮航空 BR197 (NRT ➔ TPE)</div>
+                            <div class="node-desc">成田 T1 起飛返回桃園 T2。座位：5A, 6D, 8D, 8G。平安返抵台灣。</div>
+                        </div>
+                    </div>
+
+                    <a href="https://www.google.com/maps/dir/?api=1&origin=THE+BLOSSOM+HIBIYA&destination=Narita+Airport+Terminal+1" target="_blank" class="btn-map">
+                        <i class="fa-solid fa-map-location-dot"></i> 開啟 D5【日比谷 ➔ 成田機場 T1】送機導航
+                    </a>
+
+                    <div class="meal-bar">
+                        <span><b>早</b> 飯店和洋自助</span>
+                        <span><b>午</b> 機上商務艙套餐</span>
+                        <span><b>晚</b> 溫暖的家</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 飯店與預約資訊對照卡片 -->
+        <div class="info-card">
+            <h3><i class="fa-solid fa-hotel"></i> 下榻飯店房型與預約明細</h3>
+            <table class="table-info">
+                <tr>
+                    <th>飯店名稱</th>
+                    <td>THE BLOSSOM HIBIYA</td>
+                </tr>
+                <tr>
+                    <th>飯店電話</th>
+                    <td>03-3591-8702</td>
+                </tr>
+                <tr>
+                    <th>房型一</th>
+                    <td>HIBIYA套房（雙床 61㎡）#3910-9071-4962</td>
+                </tr>
+                <tr>
+                    <th>房型二</th>
+                    <td>高級雙人房（22㎡）#3910-9713-4968</td>
+                </tr>
+                <tr>
+                    <th>入住期間</th>
+                    <td>2026/10/14 ～ 10/18（4 晚，含早餐）</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 航班座位對照表 -->
+        <div class="info-card">
+            <h3><i class="fa-solid fa-plane"></i> 4人航班預選座位對照</h3>
+            <table class="table-info">
+                <tr>
+                    <th>旅客姓名</th>
+                    <th>去程 BR198 (10/14)</th>
+                    <th>回程 BR197 (10/18)</th>
+                </tr>
+                <tr>
+                    <td>CHENG / SHIHCHIEH</td>
+                    <td>9G</td>
+                    <td>5A</td>
+                </tr>
+                <tr>
+                    <td>CHEN / WENLIANG</td>
+                    <td>6G</td>
+                    <td>6D</td>
+                </tr>
+                <tr>
+                    <td>LIN / HSUNSHU</td>
+                    <td>5D</td>
+                    <td>8D</td>
+                </tr>
+                <tr>
+                    <td>CHENG / HSIULI</td>
+                    <td>5G</td>
+                    <td>8G</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 溫馨小叮嚀 -->
+        <div class="info-card">
+            <h3><i class="fa-solid fa-bell"></i> 日光一日遊與商務叮嚀</h3>
+            <ul class="tips-list">
+                <li><b>日光氣候與衣著：</b>10月中旬奧日光（中禪寺湖、華嚴瀑布）海拔約 1,200 公尺，氣溫較東京市區低約 7～10 度，建議攜帶防風保暖外套。</li>
+                <li><b>伊呂波坂行車注意：</b>第二伊呂波坂為單向蜿蜒山路，彎道較多，如易暈車同行家人建議行前備好防暈車藥品。</li>
+                <li><b>餐廳訂位時段：</b>10/16 晚間銀座天婦羅名店已保留 17:30，與下午 OB 交流時間銜接得宜。</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>2026 Tokyo & Nikko Journey</p>
+            <p>THE BLOSSOM HIBIYA • Gourmet & Culture</p>
+        </div>
+
+    </div>
+
+    <!-- 標籤頁切換 JS -->
+    <script>
+        function switchDay(dayIndex) {
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach((btn, idx) => {
+                if (idx === dayIndex - 1) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            const panels = document.querySelectorAll('.day-panel');
+            panels.forEach((panel, idx) => {
+                if (idx === dayIndex - 1) {
+                    panel.classList.add('active');
+                } else {
+                    panel.classList.remove('active');
+                }
+            });
+
+            window.scrollTo({ top: 120, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

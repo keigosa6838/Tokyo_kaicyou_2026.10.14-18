@@ -288,6 +288,62 @@
             margin-left: 6px;
         }
 
+        .badge-flexible {
+            display: inline-block;
+            background: #f0fdf4;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 4px;
+            margin-left: 6px;
+        }
+
+        /* 餐廳彈性卡片區塊 */
+        .option-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin-top: 8px;
+        }
+
+        .option-item {
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+        .option-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .option-title {
+            font-size: 0.86rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .option-link {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-size: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .option-detail {
+            font-size: 0.78rem;
+            color: #475569;
+            margin-top: 2px;
+        }
+
         /* 導航按鈕 */
         .btn-map {
             display: flex;
@@ -628,25 +684,62 @@
                         </div>
 
                         <div class="node">
-                            <div class="node-time">12:15 - 13:30</div>
+                            <div class="node-time">12:15 - 13:45</div>
                             <div class="node-title">
-                                日光頂級午餐饗宴 <span class="badge-reservation">頂級推薦</span>
+                                日光午餐饗宴 <span class="badge-flexible">彈性方案</span>
                             </div>
                             <div class="node-desc">
-                                <b>建議首選：</b><br>
-                                1. <b>The Ritz-Carlton, Nikko</b>（中禪寺湖畔極致和牛/洋食會席）<br>
-                                2. <b>西洋料理 明治之館</b>（東照宮旁百年國家有形文化財石造洋館）
+                                當天可依天氣、時間與喜好自下列 3 個精選方案彈性選擇：
+                                <div class="option-box">
+                                    <!-- 方案 1: 船場亭 -->
+                                    <div class="option-item">
+                                        <div class="option-title">
+                                            <span>🐟 鬼怒川 船場亭 (Funabatei)</span>
+                                            <a href="https://www.funabatei.jp" target="_blank" class="option-link">
+                                                官網 <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                            </a>
+                                        </div>
+                                        <div class="option-detail">
+                                            <b>特色：</b>鬼怒川畔茅草老舖、現烤活香魚（鮎の塩焼き）、川魚料理與手打蕎麥麵，坐榻榻米觀河賞景，野趣十足！<br>
+                                            <b>地址：</b>日光市大渡1057｜<b>電話：</b>0288-21-8933
+                                        </div>
+                                    </div>
+                                    <!-- 方案 2: 日光麗思卡爾頓 -->
+                                    <div class="option-item">
+                                        <div class="option-title">
+                                            <span>🥩 The Ritz-Carlton, Nikko</span>
+                                            <a href="https://maps.google.com/?q=The+Ritz-Carlton+Nikko" target="_blank" class="option-link">
+                                                地圖 <i class="fa-solid fa-location-dot"></i>
+                                            </a>
+                                        </div>
+                                        <div class="option-detail">
+                                            <b>特色：</b>中禪寺湖畔極致景觀、栃木和牛割烹或西式湖景料理。
+                                        </div>
+                                    </div>
+                                    <!-- 方案 3: 明治之館 -->
+                                    <div class="option-item">
+                                        <div class="option-title">
+                                            <span>🏛️ 西洋料理 明治之館</span>
+                                            <a href="https://maps.google.com/?q=西洋料理+明治の館" target="_blank" class="option-link">
+                                                地圖 <i class="fa-solid fa-location-dot"></i>
+                                            </a>
+                                        </div>
+                                        <div class="option-detail">
+                                            <b>特色：</b>東照宮旁百年國家有形文化財石造洋館，經典西洋料理。
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="node">
-                            <div class="node-time">13:30 - 14:00</div>
+                            <div class="node-time">13:45 - 14:15</div>
                             <div class="node-title">途經「第二伊呂波坂 (第二いろは坂)」</div>
                             <div class="node-desc">攀升 440 公尺高低差的著名曲道，沿途飽覽秋日壯闊山景。</div>
                         </div>
 
                         <div class="node">
-                            <div class="node-time">14:00 - 15:15</div>
+                            <div class="node-time">14:15 - 15:15</div>
                             <div class="node-title">中禪寺湖畔＆華嚴瀑布自由活動</div>
                             <div class="node-desc">搭乘觀瀑電梯近距離感受三大名瀑「華嚴瀑布」水勢，湖畔散步漫遊。</div>
                         </div>
@@ -654,7 +747,7 @@
                         <div class="node">
                             <div class="node-time">15:15 - 18:30</div>
                             <div class="node-title">專車啟程返回東京市區</div>
-                            <div class="node-desc">預留假日返程車程，專車直達日本橋餐廳門口。</div>
+                            <div class="node-desc">預留假日返程車潮時間，專車直達日本橋餐廳門口。</div>
                         </div>
 
                         <div class="node">
@@ -682,7 +775,7 @@
 
                     <div class="meal-bar">
                         <span><b>早</b> 飯店和洋自助</span>
-                        <span><b>午</b> 日光頂級午宴</span>
+                        <span><b>午</b> 船場亭 / 麗思卡爾頓 / 明治之館</span>
                         <span><b>晚</b> お多幸本店 (預約)</span>
                     </div>
                 </div>
@@ -821,6 +914,7 @@
         <div class="info-card">
             <h3><i class="fa-solid fa-bell"></i> 日光一日遊與用餐叮嚀</h3>
             <ul class="tips-list">
+                <li><b>船場亭用餐小撇步：</b>船場亭位於鬼怒川畔，招牌炭火鹽烤活香魚（鮎の塩焼き）現烤需約 20～30 分鐘，建議抵達入座後先點好烤魚，可一邊坐在榻榻米上飽覽川景一邊悠閒候餐。</li>
                 <li><b>日光返程時間掌握：</b>10/17（六）為假日，奧日光返程公路及高速公路易有車潮，建議最晚 15:15 啟程返回東京，以準時赴約 18:45 お多幸本店。</li>
                 <li><b>日光氣候與衣著：</b>奧日光（中禪寺湖、華嚴瀑布）海拔約 1,200 公尺，氣溫較東京市區低約 7～10 度，請務必攜帶保暖外套。</li>
                 <li><b>伊呂波坂注意：</b>山路彎道較多，容易暈車的家人建議在出發前準備好防暈車藥品。</li>
